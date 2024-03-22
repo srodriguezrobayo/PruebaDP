@@ -1,0 +1,103 @@
+<div class="asterisco">
+    <div class="body">
+        <img class="wave" src="../../assets/wave.png" alt="fondo">
+        <div class="container">
+            <div class="img">
+                <img src="../../assets/transparente.png" alt="fondop">
+            </div>
+            <div class="login-content">
+                <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm" class="formulario">
+                    <h1>Registrarse</h1>
+                    <br>
+                    <h5 class="rol">Seleccione su tipo de usuario</h5>
+                    <br>
+                    <div class="eleccion">
+                        <a routerLink="/registro_cliente">
+                            <input type="radio" name="rol" value="Cliente" id="cliente" class="styled-radio">
+                            <label for="cliente"> Cliente</label>
+                        </a>
+                        <br>
+                        <a routerLink="/registro_empresa">
+                            <input type="radio" name="rol" value="Empresa" id="empresa" class="styled-radio" checked>
+                            <label for="empresa"> Empresa</label>
+                        </a>
+                    </div>
+                    <br>
+                    <div class="input-container">
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Nombre Empresa</h5>
+                                <input type="text" class="input" name="nombre" [(ngModel)]="empresa.Nombre_empresa" required placeholder="Nombre">
+                            </div>
+                        </div>
+    
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Teléfono</h5>
+                                <input type="text" class="input" name="telefono" [(ngModel)]="empresa.Telefono_empresa" required placeholder="Teléfono">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="input-container">
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Ciudad</h5>
+                                <select name="Ciudad" class="input" [(ngModel)]="empresa.Ciudad_id_Ciudad" title="Selecciona tu ciudad">
+                                    <option value="" disabled selected hidden>Seleccione tu Ciudad</option>
+                                    <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_Ciudad">{{ ciudad.nombre_ciudad }}</option>
+                              </select>
+                            </div>
+                        </div>
+    
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Nit Empresa</h5>
+                                <input type="text" class="input" name="nit" [(ngModel)]="empresa.Nit_Empresa" required placeholder="Nit Empresa">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="input-container">
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Correo</h5>
+                                <input type="email" class="input"  name="email" [(ngModel)]="empresa.Correoelectronico_empresa" required placeholder="Correo">
+                            </div>
+                        </div>
+    
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Contraseña</h5>
+                                <input type="password" class="input" name="password" [(ngModel)]="empresa.Password_empresa" required placeholder="Contraseña">
+                            </div>
+                        </div>
+                    </div>
+    
+                    <input type="submit" class="btn" [disabled]="!usuarioForm.form.valid" value="Registrar">
+                    <br><br>
+                    <h3>Ya tienes cuenta, inicia sesi&oacute;n aqui</h3> 
+                     <a routerLink="../inicio_sesion_empresa"><input type="button" class="btn" value="Iniciar sesi&oacute;n"></a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

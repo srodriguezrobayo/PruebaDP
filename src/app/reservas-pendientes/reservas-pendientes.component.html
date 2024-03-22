@@ -1,0 +1,215 @@
+
+<div class="root">
+  <div id="asterisco">
+      <div class="body">
+          <div class="container">
+              <div class="navigation" [class.active]="sidebarActive">
+                  <ul>
+                      <li (mouseover)="setActiveLink()">
+                          <a routerLink="/principal">
+                              <span class="icon">
+                                  <img src="../../assets/logo45p.png" alt="Logo" class="img-fluid" >
+                              </span>
+                              <span class="title">Reserve Shoot</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a routerLink="/principal">
+                              <span class="icon">
+                                  <ion-icon name="layers-outline"></ion-icon>
+                              </span>
+                              <span class="title">Reservas Disponibles</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a routerLink="/pendientes">
+                              <span class="icon">
+                                  <ion-icon name="file-tray-stacked-outline"></ion-icon>
+                              </span>
+                              <span class="title">Mis Reservas</span>
+                          </a>
+                      </li>
+                      <li>
+                          <a routerLink="/perfil_cliente">
+                              <span class="icon">
+                                  <ion-icon name="person-circle-outline"></ion-icon>
+                              </span>
+                              <span class="title">Perfil de Usuario</span>
+                          </a>
+                      </li>
+                      <li>
+                        <a (click)="cerrarsesion()">
+                            <span class="icon">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </span>
+                            <span class="title">Cerrar Sesion</span>
+                        </a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="main" [class.active]="sidebarActive">
+                  <div class="topbar">
+                      <div class="toggle" (click)="toggleSidebar()">
+                          <ion-icon name="menu-outline"></ion-icon>
+                      </div>
+
+                      <div class="user">
+                          <img id="cliente" *ngFor="let clientes of clientes | async" [src]="urlimagen+clientes.Foto_cliente"alt="">
+                      </div>
+                  </div>
+
+                  <main>
+                      <h2 class="titulo-principal">Historial de Reservas</h2>
+                      <h3>En espera</h3>
+                      <br>
+                      <div class="contenedor-carrito" *ngFor="let todo of (todo | async); let i = index">
+                        <div *ngIf="todo.Estatus === 'Espera'">
+                            <div class="carrito-productos">
+                                <div class="carrito-producto">
+                                    <img class="carrito-producto-imagen"   [src]="urlimagen+todo.Foto_empresa" alt="imagen producto">
+                                    <div class="carrito-producto-cantiidad">
+                                        <small>Id Reserva</small>
+                                        <h3>{{todo.Id_Reservacion}}</h3>
+                                    </div>
+                                    <div class="carrito-producto-titulo">
+                                        <small>Empresa</small>
+                                        <h3>{{todo.Nombre_empresa}}</h3>
+                                    </div>
+                                    <div class="carrito-producto-cantiidad">
+                                        <small>Tipo Servicio</small>
+                                        <p>{{todo.Nombre_servicio}}</p>
+                                    </div>
+                                    <div class="carrito-producto-subtotal">
+                                        <small>Hora</small>
+                                        <p>{{todo.Hora_reservacion}}</p>
+                                    </div>
+                                    <div class="carrito-producto-subtotal">
+                                      <small>Fecha</small>
+                                      <p>{{ obtenerDia(todo.Fecha_reservacion) }}</p>
+                                  </div>
+                                    <div class="carrito-producto-precio">
+                                        <small>Cantidad de personas</small>
+                                        <p>{{todo.Cant_person}}</p>
+                                    </div>
+                                    <div class="carrito-producto-precio">
+                                        <small>Recomendaciones</small>
+                                        <p class="long-text">{{todo.Condiciones}}</p>
+                                    </div>
+                                    <div>
+                                        <a [routerLink]="['../ver_reserva/completo/', todo.Id_Reservacion]">
+                                            <button type="button" class="carrito-producto-ver" name="Ver"><img src="../../assets/show-alt-regular-60.png" alt="Ver"></button>
+                                        </a>
+                                        <button type="button" (click)="borrarReservacion(todo.Id_Reservacion)" class="carrito-producto-eliminar" name="Eliminar"><img src="../../assets/trash-regular-60.png" alt="Eliminar"></button>
+                                    </div>
+                                </div>
+                                <br>
+  
+  
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Aceptadas</h3>
+                    <br>
+                    <div class="contenedor-carrito" *ngFor="let todo of (todo | async); let i = index">
+                        <div *ngIf="todo.Estatus === 'Aceptada'">
+                            <div class="carrito-productos">
+                                <div class="carrito-producto">
+                                    <img class="carrito-producto-imagen"   [src]="urlimagen+todo.Foto_empresa" alt="imagen producto">
+                                    <div class="carrito-producto-cantiidad">
+                                        <small>Id Reserva</small>
+                                        <h3>{{todo.Id_Reservacion}}</h3>
+                                    </div>
+                                    <div class="carrito-producto-titulo">
+                                        <small>Empresa</small>
+                                        <h3>{{todo.Nombre_empresa}}</h3>
+                                    </div>
+                                    <div class="carrito-producto-cantiidad">
+                                        <small>Tipo Servicio</small>
+                                        <p>{{todo.Nombre_servicio}}</p>
+                                    </div>
+                                    <div class="carrito-producto-subtotal">
+                                        <small>Hora</small>
+                                        <p>{{todo.Hora_reservacion}}</p>
+                                    </div>
+                                    <div class="carrito-producto-subtotal">
+                                      <small>Fecha</small>
+                                      <p>{{ obtenerDia(todo.Fecha_reservacion) }}</p>
+                                  </div>
+                                  <div class="carrito-producto-precio">
+                                    <small>Cantidad de personas</small>
+                                    <p>{{todo.Cant_person}}</p>
+                                </div>
+                                <div class="carrito-producto-precio">
+                                    <small>Recomendaciones</small>
+                                    <p class="long-text">{{todo.Condiciones}}</p>
+                                </div>
+                                    <div class="carrito-producto-precio">
+                                        <small>precio</small>
+                                        <p>{{ todo.Valor | currency:'COP ':'symbol':'1.0-0' }}</p>
+                                    </div>
+                                    <div>
+                                        <a [routerLink]="['../ver_reserva/completo/', todo.Id_Reservacion]">
+                                            <button type="button" class="carrito-producto-ver" name="Ver"><img src="../../assets/show-alt-regular-60.png" alt="Ver"></button>
+                                        </a>
+                                        <button type="button" (click)="borrarReservacion(todo.Id_Reservacion)" class="carrito-producto-eliminar" name="Eliminar"><img src="../../assets/trash-regular-60.png" alt="Eliminar"></button>
+                                    </div>
+                                </div>
+                                <br>
+  
+  
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Rechazadas</h3>
+                    <br>
+                    <div class="contenedor-carrito" *ngFor="let todo of (todo | async); let i = index">
+                        <div *ngIf="todo.Estatus === 'Rechazada'">                            <div class="carrito-productos">
+                                <div class="carrito-producto">
+                                    <img class="carrito-producto-imagen"   [src]="urlimagen+todo.Foto_empresa" alt="imagen producto">
+                                    <div class="carrito-producto-cantiidad">
+                                        <small>Id Reserva</small>
+                                        <h3>{{todo.Id_Reservacion}}</h3>
+                                    </div>
+                                    <div class="carrito-producto-titulo">
+                                        <small>Empresa</small>
+                                        <h3>{{todo.Nombre_empresa}}</h3>
+                                    </div>
+                                    <div class="carrito-producto-cantiidad">
+                                        <small>Tipo Servicio</small>
+                                        <p>{{todo.Nombre_servicio}}</p>
+                                    </div>
+                                    <div class="carrito-producto-subtotal">
+                                        <small>Hora</small>
+                                        <p>{{todo.Hora_reservacion}}</p>
+                                    </div>
+                                    <div class="carrito-producto-subtotal">
+                                      <small>Fecha</small>
+                                      <p>{{ obtenerDia(todo.Fecha_reservacion) }}</p>
+                                  </div>
+                                  <div class="carrito-producto-precio">
+                                    <small>Cantidad de personas</small>
+                                    <p>{{todo.Cant_person}}</p>
+                                </div>
+                                <div class="carrito-producto-precio">
+                                    <small>Recomendaciones</small>
+                                    <p class="long-text">{{todo.Condiciones}}</p>
+                                </div>
+                                    <div>
+                                        <a [routerLink]="['../ver_Reserva/', todo.Id_Reservacion]">
+                                            <button type="button" class="carrito-producto-ver" name="Ver"><img src="../../assets/show-alt-regular-60.png" alt="Ver"></button>
+                                        </a>
+                                        <button type="button" (click)="borrarReservacion(todo.Id_Reservacion)" class="carrito-producto-eliminar" name="Eliminar"><img src="../../assets/trash-regular-60.png" alt="Eliminar"></button>
+                                    </div>
+                                </div>
+                                <br>
+  
+  
+                            </div>
+                        </div>
+                    </div>   
+                  </main>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

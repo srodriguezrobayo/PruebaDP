@@ -1,0 +1,37 @@
+<div class="asterisco">
+    <div class="body">
+      <img class="wave" src="../../assets/wave.png" alt="wave">
+      <div class="container">
+        <div class="img">
+          <img src="../../assets/transparente.png" alt="transparente">
+        </div>
+        <div class="login-content">
+          <form class="formulario" (ngSubmit)="onSubmit()" #empleadoForm="ngForm">
+            <img src="../../assets/logito.png" alt="logo">
+            <h1 class="title">Reserve Shoot</h1>
+            <h2 class="title">Bienvenido</h2>
+                   <div class="input-div one">
+                      <div class="i">
+                          <i class="fas fa-user"></i>
+                      </div>
+                      <div class="div">
+                          <label for="Nom_empleado" class="info">Nombre</label>
+                          <input type="text" class="input" [(ngModel)]="empleado.Nom_empleado" name="Nom_empleado" placeholder="Nombre" required>
+                      </div>
+                   </div>
+                   <div class="input-div pass">
+                      <div class="i"> 
+                         <i class="fas fa-lock"></i>
+                      </div>
+                      <div class="div">
+                         <label for="Password_empleado" class="info">Contraseña</label>
+                         <input type="password" class="input" required [(ngModel)]="empleado.Password_empleado" name="Password_empleado" placeholder="Contraseña" required>
+                     </div>
+                  </div>
+                  <a routerLink="/olvido_contrasena_admin">¿Olvidaste tu Contraseña?</a>
+                    <input type="submit" class="btn" value="Iniciar Sesión">
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>

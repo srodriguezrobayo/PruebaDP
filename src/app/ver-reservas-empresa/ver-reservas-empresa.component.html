@@ -1,0 +1,92 @@
+
+<div class="body root" id="asterisco">
+
+  <div class="container">
+    <div class="navigation">
+        <ul>
+            <li (mouseover)="setActiveLink()">
+                <a routerLink="/principal_empresa" >
+                    <span class="icon">
+                        <img src="../../assets/logo45p.png" alt="Logo" class="img-fluid" >
+                    </span>
+                    <span class="title">Reserve Shoot</span>
+                </a>
+              </li>
+
+            <li>
+                <a routerLink="/principal_empresa">
+                    <span class="icon">
+                        <ion-icon name="file-tray-full-outline"></ion-icon>
+                    </span>
+                    <span class="title">Reservas</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="/perfil_empresa">
+                    <span class="icon">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </span>
+                    <span class="title">Perfil de Empresa</span>
+                </a>
+            </li>
+
+
+            <li>
+                <a href="/inicio_sesion_empresa">
+                    <span class="icon">
+                        <ion-icon name="log-out-outline"></ion-icon>
+                    </span>
+                    <span class="title" (click)="cerrarsesion()">Cerrar Sesion</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main" [class.active]="sidebarActive">
+        <div class="topbar">
+            <div class="toggle" (click)="toggleSidebar()">
+                <ion-icon name="menu-outline"></ion-icon>
+            </div>
+
+            <div class="user">
+              <img *ngFor="let empresa of empresa | async" [src]="urlimagen+empresa.Foto_empresa" alt="foo">
+            </div>
+        </div>
+
+
+
+        <div class="reservation-details-container">
+            <div class="reservation-image-container">
+                <img *ngFor="let r of reserva | async" [src]="urlimagen+r.Foto_cliente" alt="Imagen del Restaurante" height="125px" width="150px">
+            </div>
+            <div class="reservation-text-container" *ngFor="let reserva of reserva | async">
+                <h1>INFORMACION RESERVA</h1> 
+                <h2>Id reserva: {{reserva.Id_Reservacion}}</h2>
+                <h3 class="reservation-details-paragraph">Nombre del cliente: {{reserva.Nombre_cliente}}</h3>
+                <p class="reservation-details-paragraph">Fecha: {{reserva.Fecha_reservacion | date:'dd/MM/yyyy'}}</p>
+                <p class="reservation-details-paragraph">Hora: {{reserva.Hora_reservacion}}</p>
+                <small>Formato de 24 horas</small>
+                <p class="reservation-details-paragraph">Lugar: {{reserva.Direccion_lugarreserv}}, {{reserva.Nom_lugreserv}}</p>
+                <ul class="reservation-details-list">
+                    <li class="reservation-detail-item">Servicio: {{reserva.Nombre_servicio}}</li>
+                    <li class="reservation-detail-item">Cantidad de personas: {{reserva.Cant_person}}</li>
+                    <li class="reservation-detail-item long-text">Recomendaciones: {{reserva.Condiciones}}</li>
+                    <li class="reservation-detail-item" *ngIf="reserva.Estatus !== 'Espera'">Valor: {{ reserva.Valor | currency:'COP ':'symbol':'1.0-0' }}</li>
+                    <li class="reservation-detail-item">Estado: {{reserva.Estatus}}</li>
+                </ul>
+                <h4>Contacto del cliente</h4>
+                <p class="reservation-details-paragraph">Correo cliente: <a class="correo" [href]="'mailto:' + reserva.Correoelectronico_cliente">{{reserva.Correoelectronico_cliente}}</a></p>
+                <p class="reservation-details-paragraph">Numero de contacto: {{reserva.Telefono_cliente}}</p>
+                <a [routerLink]="['/editar_Reserva/actualizar/', reserva.Id_Reservacion]">
+                    <button type="button" class="modify-reservation-button">
+                      <i class="reservation-button-icon fas fa-pencil-alt"></i> Modificar
+                    </button>
+                  </a>                                
+                <button (click)="borrarReservacion(reserva.Id_Reservacion)" class="cancel-reservation-button">
+                    <i class="reservation-button-icon fas fa-times"></i> Cancelar Reserva
+                </button>
+            </div>
+        </div>
+</div>
+

@@ -1,0 +1,130 @@
+<div class="asterisco" [class.active]="sidebarActive">
+  <div class="body">
+      <div class="root">
+          <div class="container">
+              <div class="navigation">
+                  <ul>
+                      <li (mouseover)="setActiveLink()">
+                          <a routerLink="/principal_empresa">
+                              <span class="icon">
+                                  <img src="../../assets/logo45p.png" alt="Logo" class="img-fluid" >
+                              </span>
+                              <span class="title">Reserve Shoot</span>
+                          </a>
+                      </li>
+      
+                      <li>
+                          <a routerLink="/principal_empresa">
+                              <span class="icon">
+                                <ion-icon name="file-tray-full-outline"></ion-icon>
+                              </span>
+                              <span class="title">Reservas</span>
+                          </a>
+                      </li>
+      
+                      <li>
+                          <a routerLink="/perfil_empresa">
+                              <span class="icon">
+                                  <ion-icon name="person-circle-outline"></ion-icon>
+                              </span>
+                              <span class="title">Perfil de Usuario</span>
+                          </a>
+                      </li>
+      
+      
+                      <li>
+                          <a href="/inicio_sesion_empresa">
+                              <span class="icon">
+                                  <ion-icon name="log-out-outline"></ion-icon>
+                              </span>
+                              <span class="title" (click)="cerrarsesion()">Cerrar Sesion</span>
+                          </a>
+                      </li>
+                  </ul>
+              </div>
+      
+              <div class="main" [class.active]="sidebarActive">
+                  <div class="topbar">
+                      <div class="toggle" (click)="toggleSidebar()">
+                          <ion-icon name="menu-outline"></ion-icon>
+                      </div>
+      
+                      <div class="user">
+                          <img *ngFor="let empresa of empresa | async" [src]="urlimagen+empresa.Foto_empresa" alt="">
+                      </div>
+                  </div>
+              <main>
+                  <form (ngSubmit)="actualizarReservacion()" class="formulario" id="formulario">
+                      <div class="formulario__grupo" id="grupo__usuario">
+                          <label for="usuario" class="formulario__label">Servicio</label>
+                          <div class="formulario__grupo-input">
+                              <select class="formulario__input" name="servicio" id="servicio" placeholder="Servicio" [(ngModel)]="reservacion.Servicio_idServicio">
+                                  <option value="" disabled selected hidden>Seleccione un servicio a realizar</option>
+                                  <option *ngFor="let servicio of servicio" [value]="servicio.idServicio">{{servicio.Nombre_servicio}}</option>
+                              </select>
+                          </div>				
+                      </div>
+          
+                      <div class="formulario__grupo" id="grupo__nombre">
+                          <label for="nombre" class="formulario__label">Fecha de Reservación</label>
+                          <div class="formulario__grupo-input">
+                              <input type="date" class="formulario__input" name="fecha_reservacion" id="fecha_reservacion" [(ngModel)]="reservacion.Fecha_reservacion" placeholder="Fecha de Reservación">
+                          </div>				
+                      </div>
+          
+                      <div class="formulario__grupo" id="grupo__password">
+                          <label for="password" class="formulario__label">Hora de Reservación</label>
+                          <div class="formulario__grupo-input">
+                              <input type="time" class="formulario__input" name="hora_reservacion" id="hora_reservacion" [(ngModel)]="reservacion.Hora_reservacion" placeholder="Hora de Reservación">
+                          </div>				
+                      </div>
+          
+                      <div class="formulario__grupo" id="grupo__password2">
+                          <label for="password2" class="formulario__label">Lugar</label>
+                          <div class="formulario__grupo-input">
+                              <select class="formulario__input" name="hotel" id="hotel" [(ngModel)]="reservacion.Lugar_reservacion_idLugar_reservacion" placeholder="Seleccione un hotel">
+                                  <option value="" disabled selected hidden>Seleccione un Lugar para la Reservación</option>
+                                  <option *ngFor="let lugar of lugar" [value]="lugar.ID_lugreserv">{{lugar.Direccion_lugarreserv}}, {{lugar.Nom_lugreserv}}</option>
+                              </select>
+                          </div>				
+                      </div>
+          
+                      <div class="formulario__grupo" id="grupo__telefono">
+                          <label for="telefono" class="formulario__label">Cantidad de Personas</label>
+                          <div class="formulario__grupo-input">
+                              <input type="number" class="formulario__input" name="cantidad_personas" id="cantidad_personas" placeholder="Cantidad de Personas" min="1" max="10" [(ngModel)]="reservacion.Cant_person">
+                          </div>				
+                      </div>
+
+                      <div class="formulario__grupo" id="grupo__telefono">
+                        <label for="telefono" class="formulario__label">Valor de la reserva</label>
+                        <div class="formulario__grupo-input">
+                            <input type="number" class="formulario__input" name="Valor" id="Valor" placeholder="$" [(ngModel)]="reservacion.Valor">
+                        </div>				
+                      </div>
+          
+                      <div class="formulario__grupoT" id="grupo__condiciones">
+                        <label for="condiciones" class="formulario__label">Condiciones</label>
+                        <div class="formulario__grupo-inputT">
+                            <textarea class="formulario__inputT" name="condiciones" id="condiciones" placeholder="Condiciones" cols="33" rows="2" [(ngModel)]="reservacion.Condiciones"></textarea>
+                        </div>
+                      </div>
+
+                      <br>
+                      <!-- Grupo: Terminos y Condiciones -->
+                      <div class="formulario__grupo" id="grupo__terminos">
+                          <label class="formulario__label">
+                              <input class="formulario__checkbox" type="checkbox" name="terminos" id="terminos">
+                              Acepto los Terminos y Condiciones
+                          </label>
+                      </div>
+          
+          
+                      <div class="formulario__grupo formulario__grupo-btn-enviar">
+                          <button type="submit" class="formulario__btn">Actualizar</button>
+                      </div>
+                  </form>
+              </main>
+      </div>
+  </div>
+</div>

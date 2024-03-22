@@ -1,0 +1,45 @@
+<div class="asterisco">
+   <div class="body">
+      <div class="root">
+         <div class="container">
+                    <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm" enctype="multipart/form-data" class="new-container">
+                        <div class="row">
+                            <div class="column">
+                                <div class="input-group">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" id="nombre2" [(ngModel)]="cliente.Nombre_cliente" name="nombre" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="text" id="telefono2" [(ngModel)]="cliente.Telefono_cliente" name="telefono" required>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="input-group">
+                                    <label for="ciudad">Ciudad:</label>
+                                    <select name="Ciudad" id="ciudad2" name="Ciudad_id_Ciudad" required [(ngModel)]="cliente.Ciudad_id_Ciudad">
+                                       <option value="" disabled selected hidden>Seleccione una Ciudad</option>
+                                       <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_Ciudad">{{ ciudad.nombre_ciudad }}</option>
+                                    </select>
+                                </div>
+                                <div class="select-container">
+                                    <label for="genero">Género:</label>
+                                    <select name="Genero"   id="genero2" name="Genero_idGenero" required [(ngModel)]="cliente.Genero_idGenero">
+                                       <option value="" disabled selected hidden>Seleccione un Genero</option>
+                                       <option *ngFor="let genero of generos" [value]="genero.idGenero">{{ genero.Desc_genero }}</option>
+                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="foto">Foto:</label>
+                            <input type="file" accept="image/*" (change)="selectImage($event)" [(ngModel)]="cliente.Foto_cliente" name="Foto_cliente" id="foto2" name="foto">
+                        </div>
+                        <div class="button-container">
+                            <button type="submit">Actualizar Perfil</button>
+                            <a routerLink="/perfil_cliente"><button>Regresar</button></a>
+                        </div>
+                    </form>
+      </div>
+   </div>
+</div>

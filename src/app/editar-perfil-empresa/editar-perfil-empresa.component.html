@@ -1,0 +1,40 @@
+<div class="asterisco">
+   <div class="body">
+    <div class="container">
+        <form (ngSubmit)="onSubmit()" #empresaForm="ngForm" enctype="multipart/form-data" class="new-container">
+            <div class="row">
+                <div class="column">
+                    <div class="input-group">
+                        <label for="nombre">Nombre dela empresa:</label>
+                        <input type="text" id="nombre2" name="nombre" [(ngModel)]="empresa.Nombre_empresa" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" id="telefono2" name="telefono" [(ngModel)]="empresa.Telefono_empresa" required>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="input-group">
+                        <label for="ciudad">Ciudad:</label>
+                        <select name="Ciudad" id="ciudad2" required [(ngModel)]="empresa.Ciudad_id_Ciudad">
+                           <option value="" disabled selected hidden>Seleccione una Ciudad</option>
+                           <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_Ciudad">{{ ciudad.nombre_ciudad }}</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                     <label for="Desc_empresa">Descripción de la empresa:</label>
+                     <textarea name="Desc_empresa" id="telefono2"  placeholder="Descripcion"[(ngModel)]="empresa.Desc_empresa" ngModel #Desc_empresa="ngModel"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="foto">Foto:</label>
+                <input type="file" id="foto2" name="foto" accept="image/*" (change)="selectImage($event)" [(ngModel)]="empresa.Foto_empresa">
+            </div>
+            <div class="button-container">
+                <button type="submit">Actualizar Perfil</button>
+                <a routerLink="/perfil_empresa"><button>Regresar</button></a>
+            </div>
+        </form>
+   </div>
+</div>

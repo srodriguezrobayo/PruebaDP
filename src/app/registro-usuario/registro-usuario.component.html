@@ -1,0 +1,100 @@
+<div class="asterisco">
+    <div class="body">
+        <img class="wave" src="../../assets/wave.png" alt="wave">
+        <div class="container">
+            <div class="img">
+                <img src="../../assets/transparente.png" alt="transparente">
+            </div>
+            <div class="login-content">
+                <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm">
+                    <h1>Registrarse</h1>
+                    <br>
+                    <h5 class="rol">Seleccione su tipo de usuario</h5>
+                    <br>
+                    <div class="eleccion">
+                        <a routerLink="/registro_cliente">
+                            <input type="radio" name="rol" value="Cliente" id="cliente" class="styled-radio" checked>
+                            <label for="cliente"> Cliente</label>
+                        </a>
+                        <br>
+                        <a routerLink="/registro_empresa">
+                            <input type="radio" name="rol" value="Empresa" id="empresa" class="styled-radio">
+                            <label for="empresa"> Empresa</label>
+                        </a>
+                    </div>
+                    <br>
+                    <div class="input-container">
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Nombre</h5>
+                                <input type="text" class="input" name="Nombre_cliente" [(ngModel)]="usuario.Nombre_cliente" required placeholder="Nombre">
+                            </div>
+                        </div>
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Teléfono</h5>
+                                <input type="text" class="input" name="Telefono_cliente" [(ngModel)]="usuario.Telefono_cliente" required placeholder="Teléfono">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Ciudad</h5>
+                                <select name="Ciudad" class="input" [(ngModel)]="usuario.Ciudad_id_Ciudad" title="Selecciona tu ciudad">
+                                    <option value="" disabled selected hidden>Selecciona tu ciudad</option>
+                                    <option *ngFor="let ciudad of ciudades" [value]="ciudad.id_Ciudad">{{ciudad.nombre_ciudad}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-venus-mars"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Género</h5>
+                                <select name="genero" class="input" [(ngModel)]="usuario.Genero_idGenero" title="Selecciona tu genero">
+                                    <option value="" disabled selected hidden>Selecciona tu genero</option>
+                                    <option *ngFor="let genero of generos" [value]="genero.idGenero">{{genero.Desc_genero}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-container">
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Correo</h5>
+                                <input type="email" class="input" name="Correoelectronico_cliente" [(ngModel)]="usuario.Correoelectronico_cliente" required placeholder="Correo">
+                            </div>
+                        </div>
+                        <div class="input-div">
+                            <div class="i">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="div">
+                                <h5>Contrase&ntilde;a</h5>
+                                <input type="password" class="input" name="Password_cliente" [(ngModel)]="usuario.Password_cliente" required placeholder="Contrase&ntilde;a">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn" value="Registrar" [disabled]="!usuarioForm.form.valid">
+                    <br><br>
+                   <h3>Ya tienes cuenta, inicia sesi&oacute;n aqui</h3> 
+                    <a routerLink="../inicio_sesion"><input type="button" class="btn" value="Iniciar sesi&oacute;n"></a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

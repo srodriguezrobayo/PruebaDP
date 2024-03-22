@@ -1,0 +1,122 @@
+
+<div class="asterisco">
+  <div class="body">
+    <div class="root">
+      <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a routerLink="/principal">
+                        <span class="icon">
+                            <img src="../../assets/logo45p.png" alt="Logo" class="img-fluid" >
+                        </span>
+                        <span class="title">Reserve Shoot</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/principal">
+                        <span class="icon">
+                            <ion-icon name="layers-outline"></ion-icon>
+                        </span>
+                        <span class="title">Reservas Disponibles</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/pendientes">
+                        <span class="icon">
+                            <ion-icon name="file-tray-stacked-outline"></ion-icon>
+                        </span>
+                        <span class="title">Mis Reservas</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a routerLink="/perfil_cliente">
+                        <span class="icon">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                        </span>
+                        <span class="title">Perfil de Usuario</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="/inicio_sesion" (click)="cerrarsesion()">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Cerrar Sesion</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main" [class.active]="sidebarActive">
+            <div class="topbar">
+                <div class="toggle" (click)="toggleSidebar()">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="user">
+                    <img *ngFor="let c of cliente | async" [src]="urlimagen+c.Foto_cliente" alt="">
+                </div>
+            </div>
+
+            
+            <div class="modal-nuevo">
+                <div class="modal-content-nuevo">
+                    <img src="assets/imgs/logito.png" alt="">
+                    <div class="close-nuevo"></div>
+                </div>
+            </div>
+            
+            <div class="container-nuevo" *ngFor="let c of cliente | async">
+                <div class="card-nuevo">
+                    <div class="header-nuevo">
+                        <div class="main-nuevo">
+                            <div class="image-nuevo">
+                              <img [src]="urlimagen+c.Foto_cliente" alt="perfil" class="imagen">
+                                <!-- <div class="hover-nuevo">
+                                </div> -->
+                            </div>
+                            <h3 class="name-nuevo">{{c.Nombre_cliente}}</h3>
+                        </div>
+                    </div>
+            
+                    <div class="content-nuevo">
+                        <div class="left-nuevo">
+                            <div class="about-container-nuevo">
+                                <h3 class="title-nuevo">Correo Electronico</h3>
+                                <p class="text-nuevo">{{c.Correoelectronico_cliente}}</p>
+                            </div>
+                            <br>
+                            <div class="about-container-nuevo">
+                                <h3 class="title-nuevo">Telefono</h3>
+                                <p class="text-nuevo">{{c.Telefono_cliente}}</p>
+                            </div>
+                            <br>
+                            <div class="about-container-nuevo">
+                                <h3 class="title-nuevo">Ciudad</h3>
+                                <p class="text-nuevo">{{c.nombre_ciudad}}</p>
+                            </div>
+                            <br>
+                            <div class="about-container-nuevo">
+                                <h3 class="title-nuevo">G&eacute;nero</h3>
+                                <p class="text-nuevo">{{c.Desc_genero}}</p>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="buttons-wrap-nuevo">
+                                <div class="follow-wrap-nuevo">
+                                    <a [routerLink]="['/editar_P_usuario/actualizar/', c.id_Cliente]" class="follow-nuevo">Actualizar Perfil</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+  </div>
+</div>

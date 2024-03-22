@@ -1,0 +1,60 @@
+<div class="asterisco">
+  <div class="body">
+    <img class="wave" src="../../assets/wave.png" alt="wave">
+    <div class="container">
+      <div class="img">
+        <img src="../../assets/transparente.png" alt="transparente">
+      </div>
+      <div class="login-content" *ngIf="!correoExiste && !contrasenaRestaurada">
+        <form>
+          <img src="../../assets/logito.png" alt="logo">
+          <h1 class="title">Reserve Shoot</h1>
+          <h2 class="title">Recuperar Contraseña</h2>
+          <br>
+          <p class="info">Seleccione su tipo de usuario</p>
+          <br>
+          <div class="options">
+            <a routerLink="../olvido-contrasena_cliente">
+              <input type="radio" id="cliente" name="tipoUsuario" value="cliente" checked>
+              <label for="cliente">Cliente</label>
+            </a>
+            <a routerLink="../olvido-contrasena_empresa">
+              <input type="radio" id="empresa" name="tipoUsuario" value="empresa">
+              <label for="empresa">Empresa</label>
+            </a>
+        </div>
+                 <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <label for="Correoelectronico_cliente" class="info">Correo Electrónico</label>
+                        <input type="email" class="input" [(ngModel)]="cliente.Correoelectronico_cliente" name="Correoelectronico_cliente" placeholder="Correo Electrónico" required>
+                    </div>
+                 </div>
+                <a routerLink="/inicio_sesion">¿Recordaste tu contraseña? Inicia Sesión aquí</a>
+          <input type="submit" class="btn" value="Recuperar Contraseña" (click)="buscarCliente()">
+        </form>
+      </div>
+      <div class="login-content" *ngIf="correoExiste && !contrasenaRestaurada">
+        <div class="login-content" *ngIf="correoExiste && !contrasenaRestaurada">
+          <form>
+              <img src="../../assets/logito.png" alt="logo">
+              <h1 class="title">Reserve Shoot</h1>
+              <h2 class="title">Cambiar Contraseña</h2>
+              <div class="input-div one">
+                 <div class="i">
+                      <i class="fas fa-lock"></i>
+                 </div>
+                 <div class="div">
+                      <label for="Password_cliente" class="info">Nueva Contraseña</label>
+                      <input type="password" class="input" id="password"[(ngModel)]="cliente.Password_cliente" name="Password_cliente" placeholder="Nueva Contraseña" required>
+                 </div>
+              </div>
+              <input type="submit" class="btn" value="Confirmar" (click)="restaurarContrasena()">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <form class="form-inline">
+          <fieldset class="form-group col-sm-11"></fieldset>
+          <fieldset class="form-group col-sm-1">
+            <a class="btn btn-info" [routerLink]="['/empresa/agregar']"><img src="../../../assets/file-plus-solid-24.png" alt="Agregar +"></a>
+          </fieldset>
+        </form>
+        <br>
+        <table class="table table-striped">
+          <thead>
+            <tr class="row">
+              <th class="col-sm-1">NIT</th>
+              <th class="col-sm-2">NOMBRE</th>
+              <th class="col-sm-2">CORREO ELECTRONICO</th>
+              <th class="col-sm-3">CONTRASEÑA</th>
+              <th class="col-sm-1">TELEFONO</th>
+              <th class="col-sm-1"><a class="btn btn-link" [routerLink]="['/ciudad']">CIUDAD</a></th>
+              <th class="col-sm-2">ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let empresa of empresa | async" class="row">
+              <td class="col-sm-1"><i>{{ empresa.Nit_Empresa }}</i></td>
+              <td class="col-sm-2"><i>{{ empresa.Nombre_empresa }}</i></td>
+              <td class="col-sm-2"><i>{{ empresa.Correoelectronico_empresa }}</i></td>
+              <td class="col-sm-3"><i>{{ empresa.Password_empresa }}</i></td>
+              <td class="col-sm-1"><i>{{ empresa.Telefono_empresa }}</i></td>
+              <td class="col-sm-1"><i><a  class="btn btn-link" [routerLink]="['/ciudad']">{{ empresa.Ciudad_id_Ciudad }}</a></i></td>
+              <td class="col-sm-1">
+                <fieldset class="form-group col-sm-1">
+                  <a class="btn btn-primary" [routerLink]="['/empresa/actualizar/', empresa.Nit_Empresa]"><img src="../../../assets/edit-alt-solid-24.png" alt="Editar"></a>
+                </fieldset>
+              </td>
+              <td class="col-sm-1">
+                <fieldset class="form-group col-sm-1">
+                  <a class="btn btn-danger" (click)="borrarEmpresa(empresa.Nit_Empresa)"><img src="../../../assets/trash-solid-24.png" alt="Borrar"></a>
+                </fieldset>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

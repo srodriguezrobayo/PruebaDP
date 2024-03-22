@@ -1,0 +1,83 @@
+<div class="root">
+    <div id="asterisco">
+        <div class="body">
+            <div class="container">
+                <div class="navigation">
+                    <ul>
+                        <li (mouseover)="setActiveLink()">
+                            <a routerLink="/principal">
+                                <span class="icon">
+                                    <img src="../../assets/logo45p.png" alt="Logo" class="img-fluid">
+                                </span>
+                                <span class="title">Reserve Shoot</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/principal">
+                                <span class="icon">
+                                    <ion-icon name="layers-outline"></ion-icon>
+                                </span>
+                                <span class="title">Reservas Disponibles</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/pendientes">
+                                <span class="icon">
+                                    <ion-icon name="file-tray-stacked-outline"></ion-icon>
+                                </span>
+                                <span class="title">Mis Reservas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/perfil_cliente">
+                                <span class="icon">
+                                    <ion-icon name="person-circle-outline"></ion-icon>
+                                </span>
+                                <span class="title">Perfil de Usuario</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/inicio_sesion">
+                                <span class="icon">
+                                    <ion-icon name="log-out-outline"></ion-icon>
+                                </span>
+                                <span class="title" (click)="cerrarSesion()">Cerrar Sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="main" [class.active]="sidebarActive">
+                    <div class="topbar">
+                        <div class="toggle" (click)="toggleSidebar()">
+                            <ion-icon name="menu-outline"></ion-icon>
+                        </div>
+                        <div class="user">
+                            <img id="cliente" *ngFor="let cliente of cliente | async" [src]="urlimagen + cliente.Foto_cliente" alt="cliente">
+                        </div>
+                    </div>
+                    <main>
+                        <h2 class="titulo-principal">Agenda de Reservaciones Disponibles Por las Empresas</h2>
+                        <div class="contenedor-productos">
+                            <div *ngFor="let empresa of empresas | async" class="productos">
+                                <img class="producto-imagen" [src]="urlimagen + empresa.Foto_empresa" alt="Perfil empresa" height="400px" width="400px">
+                                <div class="producto-detalles">
+                                    <h3 class="producto-titulo">{{ empresa.Nombre_empresa }}</h3>
+                                    <p class="producto-desc">{{ empresa.Desc_empresa }}</p>
+                                    <a [routerLink]="['../vista_empresa/', empresa.Nit_Empresa]">
+                                        <button type="button" class="producto-agendar">Ver Perfil</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br><br>
+                        <div class="btn-toolbar" role="group" aria-label="First group">
+                            <a routerLink="/principal" class="btn"><b>&lt;&lt;</b></a>
+                            <a *ngFor="let pagina of numeroPaginas" [routerLink]="['/principal']" class="btn">{{ pagina }}</a>
+                            <a routerLink="/principal" class="btn"><b>&gt;&gt;</b></a>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

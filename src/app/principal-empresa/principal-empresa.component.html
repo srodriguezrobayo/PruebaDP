@@ -1,0 +1,165 @@
+<div class="body root" id="asterisco">
+  <div class="container">
+    <div class="navigation" [class.active]="sidebarActive">
+      <ul>
+        <li (mouseover)="setActiveLink()">
+            <a routerLink="/principal_empresa">
+                <span class="icon">
+                    <img src="../../assets/logo45p.png" alt="Logo" class="img-fluid" >
+                </span>
+                <span class="title">Reserve Shoot</span>
+            </a>
+          </li>
+        <li>
+            <a routerLink="/principal_empresa">
+                <span class="icon">
+                  <ion-icon name="file-tray-full-outline"></ion-icon>
+                </span>
+                <span class="title">Reservas</span>
+            </a>
+        </li>
+        <li>
+          <a routerLink="/perfil_empresa">
+                <span class="icon">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                </span>
+                <span class="title">Perfil de Empresa</span>
+            </a>
+        </li>
+        <li>
+            <a href="/inicio_sesion_empresa">
+                <span class="icon">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                </span>
+                <span class="title" (click)="cerrarsesion()">Cerrar Sesion</span>
+            </a>
+        </li>
+    </ul>
+    </div>
+
+    <div class="main" [class.active]="sidebarActive">
+      <div class="topbar">
+        <div class="toggle" (click)="toggleSidebar()">
+          <ion-icon name="menu-outline"></ion-icon>
+        </div>
+
+        <div class="user">
+            <img *ngFor="let empresa of empresa | async" [src]="urlimagen+empresa.Foto_empresa" alt="foo">
+        </div>
+      </div>
+
+      <main>
+        <h2 class="titulo-principal">Historial de reservaciones</h2>
+        <br>
+        <h3>En espera</h3>
+        <br>
+        <div class="contenedor-carrito" *ngFor="let pendiente of (pendiente | async); let i = index">
+          <div *ngIf="pendiente.Estatus === 'Espera'">
+            <div class="carrito-productos">
+                <div class="carrito-producto">
+                  <img class="carrito-producto-imagen" [src]="urlimagen+pendiente.Foto_cliente" alt="">
+                  <div class="carrito-producto-cantiidad">
+                      <small>Id Publicacion</small>
+                      <h3>{{ pendiente.Id_Reservacion }}</h3>
+                  </div>
+                  <div class="carrito-producto-precio">
+                    <small>Cliente</small>
+                    <p><b>{{ pendiente.Nombre_cliente }}</b></p>
+                  </div>
+  
+                <div class="carrito-producto-cantiidad">
+                  <small>Tipo Servicio</small>
+                  <p>{{ pendiente.Nombre_servicio }}</p>
+                </div>
+
+                <div class="carrito-producto-subtotal">
+                  <small>Hora</small>
+                  <p>{{ pendiente.Hora_reservacion }}</p>
+                </div>
+  
+                <div class="carrito-producto-subtotal">
+                  <small>Fecha</small>
+                  <p>{{ obtenerDia (pendiente.Fecha_reservacion) }}</p>
+                </div>
+
+                <div class="carrito-producto-precio">
+                  <small>Cantidad de personas</small>
+                  <p>{{ pendiente.Cant_person }}</p>
+                </div>
+  
+                <div class="carrito-producto-precio">
+                  <small>Recomendaciones</small>
+                  <p class="long-text">{{ pendiente.Condiciones }}</p>
+                </div>
+                <a [routerLink]="['/aceptar/', pendiente.Id_Reservacion]"><button class="boton-verde">Aceptar</button></a>
+                <a [routerLink]="['/rechazar/', pendiente.Id_Reservacion]"><button class="boton-rojo">Rechazar</button></a>
+                  
+              </div>
+            </div>
+            <br>
+          </div>
+      </div>
+      <br>
+      <h3>Aceptadas (A trabajar)</h3>
+      <br>
+      <div class="contenedor-carrito" *ngFor="let pendiente of (pendiente | async); let i = index">
+        <div *ngIf="pendiente.Estatus === 'Aceptada'">
+          <div class="carrito-productos">
+              <div class="carrito-producto">
+                <img class="carrito-producto-imagen" [src]="urlimagen+pendiente.Foto_cliente" alt="">
+                <div class="carrito-producto-cantiidad">
+                    <small>Id Publicacion</small>
+                    <h3>{{ pendiente.Id_Reservacion }}</h3>
+                </div>
+
+                <div class="carrito-producto-precio">
+                  <small>Cliente</small>
+                  <p><b>{{ pendiente.Nombre_cliente }}</b></p>
+                </div>
+
+              <div class="carrito-producto-cantiidad">
+                <small>Tipo Servicio</small>
+                <p>{{ pendiente.Nombre_servicio }}</p>
+              </div>
+
+              <div class="carrito-producto-subtotal">
+                <small>Hora</small>
+                <p>{{ pendiente.Hora_reservacion }}</p>
+              </div>
+
+              <div class="carrito-producto-subtotal">
+                <small>Fecha</small>
+                <p>{{ obtenerDia (pendiente.Fecha_reservacion) }}</p>
+              </div>
+
+              <div class="carrito-producto-precio">
+                <small>Cantidad de personas</small>
+                <p>{{ pendiente.Cant_person }}</p>
+              </div>
+
+              <div class="carrito-producto-precio">
+                <small>Recomendaciones</small>
+                <p class="long-text">{{ pendiente.Condiciones }}</p>
+              </div>
+
+              <div class="carrito-producto-precio">
+                <small>Precio</small>
+                <p>{{ pendiente.Valor | currency:'COP ':'symbol':'1.0-0' }}</p>
+              </div>
+              <a [routerLink]="['../reserva_detalle/', pendiente.Id_Reservacion]">
+                <button class="carrito-producto-ver"><img src="../../assets/show-alt-regular-60.png" alt="Ver"></button>
+            </a>
+            <button (click)="borrarReservacion(pendiente.Id_Reservacion)" class="carrito-producto-eliminar"><img src="../../assets/trash-regular-60.png" alt="Editar"></button>
+            </div>
+          </div>
+          <br>
+        </div>
+    </div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+
+

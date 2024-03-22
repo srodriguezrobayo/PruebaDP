@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/inicio"><img src="../../assets/logo.png" alt="Logo"/></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/inicio">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/tipo_usuario">Tipo de usuario</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/empleado">Empleado</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/genero">Genero</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/departamento">Departamento</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/ciudad">Ciudad</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/lugar_reserva">Lugar Reservacion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/servicio">Servicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/cliente">Cliente</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/empresa">Empresa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/reservacion">Reservacion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active btn btn-light" (click)="cerrarsesion()">Cerrar Sesion</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

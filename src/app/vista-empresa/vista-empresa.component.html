@@ -1,0 +1,97 @@
+<div id="asterisco">
+    <div class="body">
+        <div class="root">
+            <div class="container">
+                <div class="navigation" [class.active]="sidebarActive">
+                    <ul>
+                        <li (mouseover)="setActiveLink()">
+                            <a routerLink="/principal">
+                                <span class="icon">
+                                    <img src="../../assets/logo45p.png" alt="Logo" class="img-fluid" >
+                                </span>
+                                <span class="title">Reserve Shoot</span>
+                            </a>
+                        </li>
+            
+                        <li>
+                            <a routerLink="/principal">
+                                <span class="icon">
+                                    <ion-icon name="layers-outline"></ion-icon>
+                                </span>
+                                <span class="title">Reservas Disponibles</span>
+                            </a>
+                        </li>
+            
+                        <li>
+                            <a routerLink="/pendientes">
+                                <span class="icon">
+                                    <ion-icon name="file-tray-stacked-outline"></ion-icon>
+                                </span>
+                                <span class="title">Mis Reservas</span>
+                            </a>
+                        </li>
+            
+                        <li>
+                            <a routerLink="/perfil_cliente">
+                                <span class="icon">
+                                    <ion-icon name="person-circle-outline"></ion-icon>
+                                </span>
+                                <span class="title">Perfil de Usuario</span>
+                            </a>
+                        </li>
+            
+            
+                        <li>
+                            <a href="/inicio_sesion">
+                                <span class="icon">
+                                    <ion-icon name="log-out-outline"></ion-icon>
+                                </span>
+                                <span class="title" (click)="cerrarsesion()">Cerrar Sesion</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            
+                <div class="main" [class.active]="sidebarActive">
+                    <div class="topbar">
+                        <div class="toggle" (click)="toggleSidebar()">
+                            <ion-icon name="menu-outline"></ion-icon>
+                        </div>
+            
+                        <div class="user">
+                            <img *ngFor="let cliente of cliente | async" [src]="urlimagen+cliente.Foto_cliente" alt="">
+                        </div>
+                    </div>
+            
+                        <section class="seccion-perfil-usuario">
+                            <div class="perfil-usuario-header" *ngFor="let empresa of empresa | async">
+                                <div class="perfil-usuario-portada">
+                                    <div class="perfil-usuario-avatar">
+                                        <img  [src]="urlimagen+empresa.Foto_empresa" alt="Logo de la Empresa" alt="img-avatar">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="perfil-usuario-body" *ngFor="let empresa of empresa | async">
+                                <div class="perfil-usuario-bio">
+                                    <h3 class="titulo">{{ empresa.Nombre_empresa }}</h3>
+                                    <p class="texto">{{empresa.Desc_empresa}}</p>
+                                </div>
+                                <div class="perfil-usuario-footer">
+                                    <ul class="lista-datos">
+                                        <li><i class="icono fas fa-phone-alt"></i> Telefono: {{ empresa.Telefono_empresa }}</li>
+                                    </ul>
+                                    <ul class="lista-datos">
+                                        <li><i class="icono fas fa-envelope"></i>Correo Elect&oacute;nico: <a class="correo" [href]="'mailto:' + empresa.Correoelectronico_empresa">{{empresa.Correoelectronico_empresa}}</a></li>
+                                    </ul>
+                                    <ul class="lista-datos centro">
+                                        <li><i class="icono fas fa-map-marker-alt"></i> Ubicacion: <b *ngFor="let ciudad of ciudad | async">{{ ciudad.nombre_ciudad }}, </b><b *ngFor="let departamento of departamento | async"> {{ departamento.nombre_departamento }}</b></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div *ngFor="let empresa of empresa | async">
+                                <a [routerLink]="['/reserva/',empresa.Nit_Empresa]" class="reservar-ahora">Reserva ahora</a>
+                            </div>
+                        </section>
+        </div>
+    </div>
+</div>
